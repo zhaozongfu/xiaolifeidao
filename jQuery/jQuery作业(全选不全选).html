@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery全选</title>
+    <script src="../jquery.js"></script>
+    <style>
+      .div,
+      .div1,
+      .div2 {
+        width: 800px;
+        height: auto;
+        margin: auto;
+      }
+      .box,
+      .box1,
+      .box2 {
+        text-align: center;
+        width: 100%;
+        height: 25px;
+        background-color: aliceblue;
+      }
+      .li1 {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        top: 26px;
+      }
+      .li2 {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        top: 26px;
+      }
+      .li3 {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        top: 26px;
+      }
+      ul {
+        list-style: none;
+      }
+      ul input {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+      }
+      ul li {
+        width: 80px;
+        margin-left: -40px;
+      }
+      ul li:hover {
+        color: gray;
+        border-bottom: 1px dashed black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="div">
+      <input type="checkbox" class="li1" />
+      <div class="box">
+        <span>人员</span>
+      </div>
+      <div id="list">
+        <ul>
+          <li><input type="checkbox" />选项一</li>
+          <li><input type="checkbox" />选项二</li>
+          <li><input type="checkbox" />选项三</li>
+          <li><input type="checkbox" />选项四</li>
+          <li><input type="checkbox" />选项五</li>
+        </ul>
+      </div>
+    </div>
+    <div class="div1">
+      <input type="checkbox" class="li2" />
+      <div class="box1">
+        <span>项目</span>
+      </div>
+      <div id="list1">
+        <ul>
+          <li><input type="checkbox" />选项一</li>
+          <li><input type="checkbox" />选项二</li>
+        </ul>
+      </div>
+    </div>
+    <div class="div2">
+      <input type="checkbox" class="li3" />
+      <div class="box2">
+        <span>结构</span>
+      </div>
+      <div id="list2">
+        <ul>
+          <li><input type="checkbox" />选项一</li>
+          <li><input type="checkbox" />选项二</li>
+          <li><input type="checkbox" />选项三</li>
+          <li><input type="checkbox" />选项四</li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        $(".box span,.box1 span,.box2 span").css("color", "aqua");
+        $("#list,#list1, #list2").css("display", "none");
+      });
+
+      $(".box").on("click", function () {
+        $("#list").toggle();
+      });
+      $(".box1").on("click", function () {
+        $("#list1").toggle();
+      });
+      $(".box2").on("click", function () {
+        $("#list2").toggle();
+      });
+      $(".li1[ type='checkbox']").on("click", function () {
+        let ser = $(this).prop("checked");
+        console.log(ser);
+        console.log($(this));
+        $("#list li input[ type='checkbox']").prop("checked", ser);
+      });
+      $(".li2[ type='checkbox']").on("click", function () {
+        let ser = $(this).prop("checked");
+        console.log(ser);
+        console.log($(this));
+        $("#list1 li input[ type='checkbox']").prop("checked", ser);
+      });
+      $(".li3[ type='checkbox']").on("click", function () {
+        let ser = $(this).prop("checked");
+        console.log(ser);
+        console.log($(this));
+        $("#list2 li input[ type='checkbox']").prop("checked", ser);
+      });
+
+      $("#list input[ type='checkbox']").on("click", function () {
+        let ser = $(this).prop("checked");
+        if ($("#list input[ type='checkbox']:checked").length == 5) {
+          $(".li1[ type='checkbox' ]").prop("checked", ser);
+        } else {
+          $(".li1[ type='checkbox' ]").prop("checked", "");
+        }
+      });
+      $("#list1 input[ type='checkbox']").on("click", function () {
+        let ser = $(this).prop("checked");
+        if ($("#list1 input[ type='checkbox']:checked").length == 2) {
+          $(".li2[ type='checkbox' ]").prop("checked", ser);
+        } else {
+          $(".li2[ type='checkbox' ]").prop("checked", "");
+        }
+      });
+      $("#list2 input[ type='checkbox']").on("click", function () {
+        let ser = $(this).prop("checked");
+        if ($("#list2 input[ type='checkbox']:checked").length == 4) {
+          $(".li3[ type='checkbox' ]").prop("checked", ser);
+        } else {
+          $(".li3[ type='checkbox' ]").prop("checked", "");
+        }
+      });
+    </script>
+  </body>
+</html>

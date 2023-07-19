@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li id="www">张三</li>
+        <li><span>李四</span></li>
+        <li>王五</li>
+        <li>小黑子</li>
+        <li>坤坤</li>
+        <li>老马</li>
+      </ul>
+      <div>
+        <a href="">666</a>
+      </div>
+    </div>
+    <script>
+      let css = {
+        backgroundColor: "yellow",
+        color: "green",
+      };
+      $("ul").css("listStyle", "none");
+      //   $("ul li:first").css("backgroundColor","red");//选取第一个
+      //   $("ul li:last").css(css);//选取最后一个
+      //   $("ul li:even").css("backgroundColor","blue")//偶数行
+      //   $("ul li:odd").css("backgroundColor","aqua")//奇数行
+      //   $("ul li:eq(3)").css("backgroundColor","yellow")//选取指定索引位置的元素。
+      //   $("ul li:gt(3)").css("backgroundColor","green")//大于下标3的li
+      //   $("ul li:lt(2)").css("backgroundColor","pink")//小于下标2的li
+      //   $("ul li:contains('坤坤')").css("backgroundColor", "blue");//包含指定文本
+      //   $("ul li:not('#www')").css("backgroundColor", "blue");//不包含指定文本
+      //   $("ul li:has('span')").css("backgroundColor", "pink");//包含指定元素的元素。
+      
+      $("ul li").click(function () {
+        $(this).css("color", "blue");
+        console.log($(this).html());
+      });
+    </script>
+  </body>
+</html>

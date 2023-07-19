@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>jq焦点旋转轮播图</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "微软雅黑";
+      }
+      #test {
+        width: 1000px;
+        height: 350px;
+        margin: 0 auto;
+        top: 30px;
+        position: relative;
+        overflow: hidden;
+      }
+      #test ul li {
+        list-style: none;
+        float: left;
+        border: #fff solid 20px;
+        margin-left: -40px;
+        overflow: hidden;
+
+        width: 250px;
+        height: 350px;
+        position: relative;
+      }
+      #test ul li img {
+        position: absolute;
+      }
+      .btnleft {
+        position: absolute;
+        left: 10px;
+        top: 155px;
+        font-size: 50px;
+        color: #fff;
+        opacity: 0.5;
+      }
+      .btnright {
+        position: absolute;
+        right: 35px;
+        top: 155px;
+        font-size: 50px;
+        color: #fff;
+        opacity: 0.5;
+      }
+      .btngroup span:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="test">
+      <ul>
+        <li><img src="https://w.wallhaven.cc/full/we/wallhaven-we63lr.jpg" /></li>
+        <li><img src="https://w.wallhaven.cc/full/we/wallhaven-we63lr.jpg" /></li>
+        <li><img src="https://w.wallhaven.cc/full/we/wallhaven-we63lr.jpg" /></li>
+        <li><img src="https://w.wallhaven.cc/full/we/wallhaven-we63lr.jpg" /></li>
+      </ul>
+      <div class="btngroup">
+        <span class="btnleft">&lt;</span>
+        <span class="btnright">&gt;</span>
+      </div>
+    </div>
+    <!------------------------>
+   <script src="./jq22.com_demo_jQuery-lbt20160125_jquery.min.js"></script>
+   <script src="./jq22.com_demo_jQuery-lbt20160125_jquery.transform-0.9.3.min_.js"></script>
+    <script>
+      $(document).ready(function (e) {
+        // $("#test").animate({rotate:"45deg"});
+
+        var loop = (function () {
+          var $btnl = $(".btnleft"),
+            $btnr = $(".btnright"),
+            $list = $("#test ul li"),
+            origin = ["125px", "400px"],
+            origin1 = ["125px", "700px"],
+            imgIndex = 0,
+            animate = false;
+
+          var arrimg = creatimg([
+            ["https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg"],
+            ["https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg"],
+            ["https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg"],
+            ["https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg", "https://w.wallhaven.cc/full/7p/wallhaven-7p15pv.jpg"],
+          ]);
+
+          function bibao() {
+            config();
+            setevent();
+          }
+          function config() {
+            var chushi = -6,
+              angel = 6;
+            $list.transform({ origin: origin });
+            $list.each(function (i) {
+              $(this).transform({ rotate: chushi + i * angel + "deg" });
+              //$(this).transform({rotate: '15deg'});
+            });
+          }
+          function setevent() {
+            /*var t=setTimout(function(){
+			loop1();
+			},1000)*/
+            clearInterval(loop3);
+            var loop3 = setInterval(function () {
+              loop1();
+            }, 2500);
+            $(".btnright").bind("click", function () {
+              clearInterval(loop3);
+              var t = setTimeout(function () {
+                clearInterval(loop3);
+                loop3 = setInterval(function () {
+                  loop1();
+                }, 3000);
+              }, 1200);
+              if (animate) {
+                //animate=false;
+                return false;
+              }
+              animate = true;
+              loop1();
+            });
+
+            // if(!$new_img.is(":animated")){
+            //clearInterval(t);
+
+            // clearTimeout(t);
+
+            function loop1() {
+              //alert(1);
+              imgIndex += 1;
+              if (imgIndex > 3) {
+                imgIndex = 0;
+              }
+
+              $list.each(function (i) {
+                var $this = $(this);
+                var $old_img = $this.children("img");
+                //  alert(arrimg[imgIndex][i]);
+                var $new_img = $(arrimg[imgIndex][i]);
+
+                //  alert(arrimg[imgIndex][i]);
+                $this.append($new_img);
+                $old_img.transform({ origin: origin1 });
+                $new_img.transform({ origin: origin1, rotate: "-45deg" });
+                setTimeout(function () {
+                  $old_img.animate({ rotate: "45deg" });
+                  $new_img.animate({ rotate: "0deg" }, 500, function () {
+                    $old_img.remove();
+                    if (i * 200 == 600) {
+                      setTimeout(function () {
+                        animate = false;
+                      }, 600);
+                    }
+                  });
+                }, i * 200);
+              });
+            }
+            //return loop1;
+            $(".btnleft").bind("click", function () {
+              //if($new_img.is(":animated")){return false;}
+              clearInterval(loop3);
+              var t = setTimeout(function () {
+                animate = false;
+                clearInterval(loop3);
+                loop3 = setInterval(function () {
+                  loop1();
+                }, 3000);
+              }, 1200);
+              if (animate) {
+                return false;
+              }
+              animate = true;
+              loop2();
+              //return loop2();
+            });
+            function loop2() {
+              imgIndex += -1;
+              if (imgIndex < 0) {
+                imgIndex = 3;
+              }
+              $list.each(function (i) {
+                var $this = $(this);
+                var $old_img = $this.children("img");
+                //  alert(arrimg[imgIndex][i]);
+                var $new_img = $(arrimg[imgIndex][i]);
+
+                //  alert(arrimg[imgIndex][i]);
+                $this.append($new_img);
+                $old_img.transform({ origin: origin1 });
+                $new_img.transform({ origin: origin1, rotate: "45deg" });
+
+                setTimeout(function () {
+                  $old_img.animate({ rotate: "-45deg" });
+                  $new_img.animate({ rotate: "0deg" }, 500, function () {
+                    $old_img.remove();
+                  });
+                }, (3 - i) * 200);
+              });
+            }
+          }
+          function creatimg(arr) {
+            var img_handle = [];
+            for (var i in arr) {
+              img_handle[i] = [];
+              for (var j in arr[i]) {
+                img_handle[i][j] = new Image();
+                img_handle[i][j].src = arr[i][j];
+              }
+            }
+            return img_handle;
+          }
+          return bibao;
+        })();
+        loop();
+      });
+    </script>
+  </body>
+</html>

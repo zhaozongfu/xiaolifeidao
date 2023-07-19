@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../jquery.js"></script>
+    <title>提示插件</title>
+    <style>
+      #div {
+        text-align: center;
+        margin: auto;
+        margin-top: 180px;
+      }
+      span {
+        display: inline-block;
+        width: 80px;
+        height: 50px;
+        margin-left: 30px;
+        border: 1px solid blue;
+      }
+      .box {
+        width: 300px;
+        height: 30px;
+        background-color: black;
+        color: #fff;
+        position: relative;
+        left: 70px;
+        top: -140px;
+        border-radius: 10px;
+        display: none;
+      }
+      .box1 {
+        text-align: center;
+        width: 80px;
+        height: 30px;
+        background-color: black;
+        color: #fff;
+        position: relative;
+        left: 180px;
+        top: 40px;
+        border-radius: 10px;
+        display: none;
+      }
+      .box2 {
+        text-align: center;
+        width: 80px;
+        height: 30px;
+        background-color: black;
+        color: #fff;
+        position: relative;
+        left: 160px;
+        top: -40px;
+        border-radius: 10px;
+        display: none;
+      }
+      .box3 {
+        text-align: center;
+        width: 80px;
+        height: 30px;
+        background-color: black;
+        color: #fff;
+        position: relative;
+        left: 570px;
+        top: -40px;
+        border-radius: 10px;
+        display: none;
+      }
+      .box4 {
+        text-align: center;
+        width: 80px;
+        height: 30px;
+        background-color: #41ae3c;
+        color: #fff;
+        position: relative;
+        left: 523px;
+        top: -83px;
+        border-radius: 10px;
+        display: none;
+      }
+      .box5 {
+        text-align: center;
+        width: 80px;
+        height: 30px;
+        background-color: black;
+        color: #fff;
+        position: relative;
+        left: 550px;
+        top: -40px;
+        border-radius: 10px;
+        transform-style: preserve-3d;
+        transition: all 0.3s ease-in-out;
+        perspective: 800px;
+
+        display: none;
+      }
+      .box5:hover {
+        transform: rotateY(90deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div">
+      <span id="span1">上面提示</span>
+      <span id="span2">下面提示</span>
+      <span id="span3">左边提示</span>
+      <span id="span4">右边提示</span>
+      <span id="span5">提示动画1</span>
+      <span id="span6">提示动画2</span>
+      <span id="span7">提示动画3</span>
+      <span id="span8">提示动画4</span>
+      <span id="span9">click提示动画5</span>
+      <span id="span10">click Confirm</span>
+    </div>
+    <div class="box">上面提示</div>
+    <div class="box1">下面提示</div>
+    <div class="box2">左边提示</div>
+    <div class="box3">右边提示</div>
+    <div class="box4">提示动画1</div>
+    <div class="box5">提示动画2</div>
+    <div class="box6">提示动画3</div>
+    <div class="box7">提示动画4</div>
+    <div class="box8">click提示动画5</div>
+    <div class="box9">click Confirm</div>
+  </body>
+  <script>
+    //上面提示
+    $("#span1").mouseenter(function () {
+      $(".box")
+        .css({
+          marginTop: "50px",
+        })
+        .slideDown(800);
+    });
+    $("#span1").mouseleave(function () {
+      $(".box").css("display", "none");
+    });
+    //下面提示
+    $("#span2").mouseenter(function () {
+      $(".box1")
+        .css({
+          marginTop: "-35px",
+        })
+        .slideDown(800);
+    });
+    $("#span2").mouseleave(function () {
+      $(".box1").css("display", "none");
+    });
+    //左边显示
+    $("#span3").mouseenter(function () {
+      $(".box2").animate(
+        {
+          marginLeft: "45px",
+        },
+        500
+      );
+      $(".box2").css("display", "block");
+    });
+    $("#span3").mouseleave(function () {
+      $(".box2").animate(
+        {
+          marginLeft: "0px",
+        },
+        10
+      );
+      $(".box2").css("display", "none");
+    });
+    //右边显示
+    $("#span4").mouseenter(function () {
+      $(".box3").animate(
+        {
+          marginLeft: "-65px",
+        },
+        500
+      );
+      $(".box3").css("display", "block");
+    });
+    $("#span4").mouseleave(function () {
+      $(".box3").animate(
+        {
+          marginLeft: "0px",
+        },
+        10
+      );
+      $(".box3").css("display", "none");
+    });
+    //提示动画1
+    $("#span5").mouseenter(function () {
+      $(".box4").fadeIn(500);
+    });
+    $("#span5").mouseleave(function () {
+      $(".box4").fadeOut(500);
+    });
+    //提示动画2
+    $("#span6").on("mouseenter", function () {
+      $(".box5").fadeIn(1000).css({
+        transform: "rotateY(360deg)",
+      });
+    });
+
+    $("#span6").on("mouseleave", function () {
+      $(".box5").fadeOut(1000).css({
+        transform: "rotateY(0deg)",
+      });
+      $(".box5").css("display", "none");
+    });
+  </script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script>
+        $.validator.setDefaults({
+            submitHandler: function () {
+                alert("提交事件!");
+            }
+        });
+        $().ready(function () {
+            $("#commentForm").validate();
+        });
+    </script>
+
+    <form class="cmxform" id="commentForm" method="get" action="">
+        <fieldset>
+            <!-- <legend>输入您的名字，邮箱，URL，备注。</legend> -->
+            <p>
+                <label for="cname">单行文本</label>
+                <input id="cname" name="name" type="text" required>
+            </p>
+            <p>
+                <label for="cname1">多行文本</label>
+                <input id="cname1" type="email" name="text" required>
+            </p>
+            <p>
+                <select name="" id="" required>
+                    <option value="1">111</option>
+                    <option value="2">222</option>
+                    <option value="3">333</option>
+                </select>
+            </p>
+            <p>
+                <label for="ccomment">备注 (必需)</label>
+                <textarea id="ccomment" name="comment" required></textarea>
+            </p>
+            <p>
+                <input class="submit" type="submit" value="Submit">
+            </p>
+        </fieldset>
+    </form>
+    <script>
+    </script>
+</body>
+
+</html>
