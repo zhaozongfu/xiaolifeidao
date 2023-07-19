@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./city.js"></script>
+  </head>
+  <body>
+    <select id="province">
+      <option value="-1">请选择省份</option>
+    </select>
+    <select id="city">
+      <option value="-1">请选择城市</option>
+    </select>
+    <select id="area">
+      <option value="-1">请选择县区</option>
+    </select>
+    <script>
+      const province = document.getElementById("province");
+      const cityObj = document.getElementById("city");
+      const areaObj = document.getElementById("area");
+      (function () {
+        let html = "<option value='-1'>请选择省份</option>";
+        citys.forEach((item, index) => {
+          html += `<option value="${index}">${item.name}</option>`;
+        });
+        province.innerHTML = html;
+        province.addEventListener("change", function () {
+          let index = this.value;
+          let city = citys[index].city;
+          let html = `<option value="-1">请选择城市</option>`;
+          city.forEach(
+            (item, index) =>
+              (html += `<option value="${index}">${item.name}</option>`)
+          );
+          areaObj.innerHTML = `<option value="-1">请选择县区</option>`;
+          cityObj.innerHTML = html;
+          cityObj.addEventListener("change", function () {
+            let index = this.value;
+            let area = city[index].area;
+            let html = `<option value="-1">请选择县区</option>`;
+            area.forEach(
+              (item, index) =>
+                (html += `<option value="${index}">${item}</option>`)
+            );
+            areaObj.innerHTML = html;
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
